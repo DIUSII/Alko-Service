@@ -1,13 +1,19 @@
 <template>
     <div class="mainScreen">
-        <header-main-screen></header-main-screen>
+        <header-main-screen @openAutorization="openAutorization"></header-main-screen>
         <filter-filter></filter-filter>
         <div class="fixed-container sorting-viewAclo">
             <sorting></sorting>
             <view-alco></view-alco>
         </div>
-        <login-login class="modalLogin"></login-login>
-        <div class="blackout"></div>
+        <login-login 
+            class="modalLogin" 
+            v-show="login" 
+            @closeAutorization="closeAutorization" 
+            @comInAkk="comInAkk" 
+            @dataAkk="dataAkk($event)"
+        ></login-login>
+        <div class="blackout" v-show="login" @click="closeAutorization"></div>
     </div>
 </template>
 <script>
@@ -17,6 +23,31 @@
     import viewAlco from './viewAlcohol/viewAlcohol'
     import login from '../login/login'
     export default {
+        data(){
+            return {
+                login: false,
+                user: {},
+            }
+        },
+        methods: {
+            closeAutorization(){
+                this.login = false;
+            },
+            openAutorization(){
+                this.login = true;
+            },
+            dataAkk(user){
+                this.user = user;
+            },
+            comInAkk(){
+                // console.log(user);
+                if(this.user.password === "" || this.user.login === ""){
+                    this.login = true;
+                } else {
+                    this.login = false;
+                }
+            },
+        },
         components: {
             'header-main-screen': headerMainScreen,
             "filter-filter": filter,

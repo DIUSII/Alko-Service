@@ -28,7 +28,7 @@
                     <img src="./images/like.svg" alt="like" class="nav-bar__like_img">
                 </div>
                 <div class="nav-bar__profile">
-                    <div class="nav-bar__profile_text">Профиль</div>
+                    <div class="nav-bar__profile_text" @click="$emit('openAutorization')">Профиль</div>
                     <img src="./images/man.svg" alt="man" class="nav-bar__profile_img">
                 </div>
             </div>

@@ -1,8 +1,9 @@
 <template>
-    <div class="login">
+    <div class="login" :class="{editHeight: errorNullInput}">
         <div class="login__title">Вход</div>
         <hr class="login__hr">
-        <span class="login__cross"></span>
+        <span class="login__cross" @click="$emit('closeAutorization')"></span>
+        <!--Ccылки на соцсети -->
         <div class="login__network">
             <div class="login__sub-title">Через соцсети</div>
             <div class="login__vk">
@@ -15,24 +16,125 @@
             </div>
             <hr class="login__hr">
         </div>
+        <!-- Форма авторизации -->
         <div class="login__authorization">
             <div class="login__sub-title login__sub-title_akk">С помощью аккаунта</div>
             <div class="login__registration">Зарегистрироваться</div>
-            <input type="text" class="login__name login__input" placeholder="Логин">
-            <input type="text" class="login__password login__input" placeholder="Пароль">
-            <button class="login__button">Войти</button>
+            <input 
+                type="text" 
+                class="login__name login__input" 
+                :class="{
+                    orangeBorder:focusInput, 
+                    orangeBack: checkInput,
+                    redBorder: nullValueInput
+                }"
+                required
+                placeholder="Логин" 
+                @focus="focusInput = true"
+                @blur="focusInput = false, fillInput()"
+                @keyup.enter="fillInput"
+                v-model='login'
+            >
+            <input 
+                required
+                type="text" 
+                class="login__password login__input" 
+                placeholder="Пароль"
+                :class="{
+                    orangeBorder:focusInputPass, 
+                    orangeBack: checkInputPass,
+                    redBorder: nullValueInputPass
+                }"
+                @focus="focusInputPass = true"
+                @blur="focusInputPass = false, fillInputPass()"
+                @keyup.enter="fillInputPass"
+                v-model='password'
+            >
+            <div class="login__center">
+                <span class="login__null-error" v-show="errorNullInput">Логин и/или пароль не могут быть пустыми</span>
+            </div>
+            <button class="login__button" @click="$emit('comInAkk', comInAkk())">Войти</button>
             <div class="login__forget">Забыли пароль?</div>
         </div>
-
     </div>
 </template>
 <script>
 export default {
-    
+    data(){
+        return {
+            focusInput: false,
+            focusInputPass: false,
+            checkInput: false,
+            checkInputPass: false,
+            nullValueInput: false,
+            nullValueInputPass: false,
+            errorNullInput: false,
+            login: "",
+            password: "",
+        }
+    },
+    methods: {
+        fillInput(){
+            if(this.login === ""){
+                this.checkInput = false;
+                this.nullValueInput = true;
+                this.errorNullInput = true;
+            } else {
+                this.checkInput = true;
+                this.nullValueInput = false;
+                this.errorNullInput = false;
+            }
+        },
+        fillInputPass(){
+            if(this.password === ""){
+                this.checkInputPass = false;
+                this.nullValueInputPass = true;
+                this.errorNullInput = true;
+            } else {
+                this.checkInputPass = true;
+                this.nullValueInputPass = false;
+                this.errorNullInput = false;
+            }
+        },
+        comInAkk(){
+            if(this.login === ""){
+                this.nullValueInput = true;
+            } 
+            if(this.password === ""){
+                this.nullValueInputPass = true;
+            }
+            let user = {
+                login: this.login,
+                password: this.password,
+            }
+            this.$emit('dataAkk', user);
+            if(this.login !== "" && this.password !== ""){
+                this.focusInput = this.focusInputPass = false;
+                this.checkInput = this.checkInputPass = false;
+                this.nullValueInput = this.nullValueInputPass = false;
+                this.errorNullInput = false;
+                this.login = "";
+                this.password = "";
+            }
+        }
+    }
 }
 </script>
 <style lang="scss">
-    .login{
+    .editHeight{
+        height: 438px !important;
+    }
+    .redBorder{
+        border: 2px solid #EA4335 !important;
+    }
+    .orangeBorder{
+        border: 2px solid #F6DB68 !important;
+    }
+    .orangeBack{
+        background: rgba(246, 219, 104, 0.5) !important;
+        border: 1px solid #ACACAC !important;
+    }
+    .login{ // Заголовок и внешний вид авторизации по vk, google
         padding: 30px 0 40px;
         max-width: 520px;
         background-color: #FFF;
@@ -120,6 +222,8 @@ export default {
                 vertical-align: middle;
             }
         }
+    }
+    .login{// Форма авторизации
         &__authorization{
             padding: 0 35px;
         }
@@ -166,6 +270,16 @@ export default {
             display: inline-block;
             vertical-align: middle;
             margin-left: 30px;
+        }
+        &__center{
+            text-align: center;
+        }
+        &__null-error{
+            font-family: Montserrat;
+            font-size: 14px;
+            color: #EA4335;
+            margin-bottom: 20px;
+            display: inline-block;
         }
     }
 </style>
