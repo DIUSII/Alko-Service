@@ -12,8 +12,15 @@
             @closeAutorization="closeAutorization" 
             @comInAkk="comInAkk" 
             @dataAkk="dataAkk($event)"
+            @clickRegister="clickRegister"
         ></login-login>
-        <div class="blackout" v-show="login" @click="closeAutorization"></div>
+        <register 
+            class="modalRegister"
+            v-show="register"
+            @closeRegister="closeRegister"
+            @clickRegisterAkk="clickRegisterAkk"
+        ></register>
+        <div class="blackout" v-show="back" @click="closeAutorization"></div>
     </div>
 </template>
 <script>
@@ -22,19 +29,24 @@
     import sorting from './sorting/sorting'
     import viewAlco from './viewAlcohol/viewAlcohol'
     import login from '../login/login'
+    import register from '../register/register'
     export default {
         data(){
             return {
                 login: false,
+                register: false,
+                back: false,
                 user: {},
             }
         },
         methods: {
             closeAutorization(){
                 this.login = false;
+                this.back = false;
             },
             openAutorization(){
                 this.login = true;
+                this.back = true;
             },
             dataAkk(user){
                 this.user = user;
@@ -43,10 +55,25 @@
                 // console.log(user);
                 if(this.user.password === "" || this.user.login === ""){
                     this.login = true;
+                    this.back = true;
                 } else {
                     this.login = false;
+                    this.back = true;
                 }
             },
+            clickRegister(){
+                this.register = true;
+                this.login = false;
+                this.back = true;
+            },
+            closeRegister(){
+                this.register = false;
+                this.back = false;
+            },
+            clickRegisterAkk(){
+                this.register = false;
+                this.back = false;
+            }
         },
         components: {
             'header-main-screen': headerMainScreen,
@@ -54,6 +81,7 @@
             sorting,
             'view-alco': viewAlco,
             "login-login":login,
+            register,
             
         }
     }
@@ -91,5 +119,14 @@
         left: 0;
         background: #3F3F3F;
         opacity: 0.5;
+    }
+    .modalRegister{
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
     }
 </style>

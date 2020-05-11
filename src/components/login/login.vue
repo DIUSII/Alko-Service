@@ -19,7 +19,7 @@
         <!-- Форма авторизации -->
         <div class="login__authorization">
             <div class="login__sub-title login__sub-title_akk">С помощью аккаунта</div>
-            <div class="login__registration">Зарегистрироваться</div>
+            <div class="login__registration" @click="$emit('clickRegister')">Зарегистрироваться</div>
             <input 
                 type="text" 
                 class="login__name login__input" 
@@ -74,7 +74,7 @@ export default {
         }
     },
     methods: {
-        fillInput(){
+        fillInput(){//Проверяет заполненость input логин
             if(this.login === ""){
                 this.checkInput = false;
                 this.nullValueInput = true;
@@ -85,7 +85,7 @@ export default {
                 this.errorNullInput = false;
             }
         },
-        fillInputPass(){
+        fillInputPass(){// Проверяет заполненость поля пароль
             if(this.password === ""){
                 this.checkInputPass = false;
                 this.nullValueInputPass = true;
@@ -96,7 +96,7 @@ export default {
                 this.errorNullInput = false;
             }
         },
-        comInAkk(){
+        comInAkk(){// Вход в учентную запись
             if(this.login === ""){
                 this.nullValueInput = true;
             } 
@@ -241,13 +241,17 @@ export default {
             border-radius: 50px;
             padding:11px 0 11px 20px;
             font-family: Montserrat;
-            font-style: normal;
             font-weight: 500;
             font-size: 14px;
-            opacity: 0.5;
             width: 100%;
             margin-bottom: 20px;
             outline: none;
+            &::placeholder{
+                font-family: Montserrat;
+                font-weight: 500;
+                font-size: 14px;
+                opacity: 0.5;
+            }
         }
         &__button{
             font-family: Montserrat;
