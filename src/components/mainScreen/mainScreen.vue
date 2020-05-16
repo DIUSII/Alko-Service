@@ -20,6 +20,7 @@
             v-show="register"
             @closeRegister="closeRegister"
             @clickRegisterAkk="clickRegisterAkk"
+            @user="userRegister($event)"
         ></register>
         <recovery 
             v-show="recovery === true"
@@ -46,55 +47,7 @@
                 recovery: false,
                 back: false,
                 user: {},
-            }
-        },
-        methods: {
-            closeAutorization(){
-                this.login = false;
-                this.back = false;
-            },
-            openAutorization(){
-                this.login = true;
-                this.back = true;
-            },
-            dataAkk(user){
-                this.user = user;
-            },
-            comInAkk(){
-                // console.log(user);
-                if(this.user.password === "" || this.user.login === ""){
-                    this.login = true;
-                    this.back = true;
-                } else if(this.user.password === "123" && this.user.login === "123"){
-                    this.login = false;
-                    this.back = false;
-                } 
-            },
-            clickRegister(){
-                this.register = true;
-                this.login = false;
-                this.back = true;
-            },
-            closeRegister(){
-                this.register = false;
-                this.back = false;
-            },
-            clickRegisterAkk(){
-                this.register = false;
-                this.back = false;
-            },
-            recoveryLogin(){
-                this.login = false;
-                this.recovery = true;
-                this.back = true;
-            },
-            recoveryPass(){
-                this.recovery = false;
-                this.back = false;
-            },
-            closeRecoveryPass(){
-                this.recovery = false;
-                this.back = false;
+                userReg: null,
             }
         },
         components: {
@@ -106,7 +59,67 @@
             register,
             recovery
             
-        }
+        },
+        methods: {
+            closeAutorization(){ // Тыкнуть на задний фон и закрыть все окна
+                this.login = false;
+                this.register = false;
+                this.recovery = false;
+                this.back = false;
+            },
+            openAutorization(){// открыть авторизацию
+                this.login = true;
+                this.back = true;
+            },
+            dataAkk(user){ // Присвоить объект из модального онка логин
+                this.user = user;
+            },
+            comInAkk(){// Проверка на валидацию  модальное окно логин
+                // console.log(user);
+                if(this.user.password === "" || this.user.login === ""){
+                    this.login = true;
+                    this.back = true;
+                } else if(this.user.password === "123" && this.user.login === "123"){
+                    this.login = false;
+                    this.back = false;
+                } 
+            },
+            clickRegister(){ // Открыть модальное окно регистрации
+                this.register = true;
+                this.login = false;
+                this.back = true;
+            },
+            closeRegister(){// Закрыть модальное окно регистрации
+                this.register = false;
+                this.back = false;
+            },
+            clickRegisterAkk(){ // Зарегстритроваться 
+                console.log(this.userReg);
+                if(this.userReg === null){
+                    this.register = true;
+                    this.back = true;
+                } else {
+                    this.register = false;
+                    this.back = false;
+                }
+            },
+            recoveryLogin(){// Открыть модальное окно восстановление пароля
+                this.login = false;
+                this.recovery = true;
+                this.back = true;
+            },
+            recoveryPass(){// Нажать на кнопку для отправления письма
+                this.recovery = false;
+                this.back = false;
+            },
+            closeRecoveryPass(){// Закрывает модальное окна восстановление пароля
+                this.recovery = false;
+                this.back = false;
+            },
+            userRegister(user){ // Регистрация пользователя
+                this.userReg = user;
+            }
+        },
     }
 </script>
 <style lang="scss">
@@ -144,13 +157,12 @@
         opacity: 0.5;
     }
     .modalRegister{
-        position: absolute;
-        margin: auto;
-        top: 0;
-        bottom: 0;
-        left: 0;
         right: 0;
         z-index: 1000;
+        position: fixed;
+        margin: auto;
+        top: 5%;
+        left: 0;
     }
     .modalRecovery{
         right: 0;
