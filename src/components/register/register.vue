@@ -6,31 +6,58 @@
         <form class="register__form">
             <label >
                 <p class="register__text">Введите ваш логин</p>
-                <input type="text" class="register__input" placeholder="Логин">
+                <input 
+                    type="text" 
+                    class="register__input" 
+                    placeholder="Логин"
+                    v-model="login"
+                    
+                >
             </label>
             <label >
                 <p class="register__text">Придумайте пароль <span class="register__span">(не короче шести символов)</span></p>
-                <input type="text" class="register__input" placeholder="Пароль">
+                <input type="password" class="register__input" placeholder="Пароль">
             </label>
             <label >
                 <p class="register__text">Повторите пароль</p>
-                <input type="text" class="register__input" placeholder="Повторите пароль">
+                <input type="password" class="register__input" placeholder="Повторите пароль">
             </label>
             <label >
                 <p class="register__text">Ваше имя</p>
                 <input type="text" class="register__input" placeholder="Имя">
             </label>
-            <button class="register__button" @click="$emit('clickRegisterAkk')">Зарегистрироваться</button>
+            <button class="register__button" @click="$emit('clickRegisterAkk',  clickRegisterAkk())">Зарегистрироваться</button>
         </form>
     </div>
 </template>
 <script>
     export default {
-
+        data(){
+            return {
+                login: "",
+            }
+        },
+        methods: {
+            clickRegisterAkk(){
+            }
+        }
     }
 </script>
 <style lang="scss">
-    .register{
+    .editHeightRegister{
+        height: 438px !important;
+    }
+    .redBorder{
+        border: 1px solid #EA4335 !important;
+    }
+    .orangeBorder{
+        border: 1px solid #F6DB68 !important;
+    }
+    .orangeBack{
+        background: rgba(246, 219, 104, 0.5) !important;
+        border: 1px solid #ACACAC !important;
+    }
+    .register{//Стили для формы регистрации
         max-width: 520px;
         background: #FFFFFF;
         border-radius: 30px;

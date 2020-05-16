@@ -13,6 +13,7 @@
             @comInAkk="comInAkk" 
             @dataAkk="dataAkk($event)"
             @clickRegister="clickRegister"
+            @recoveryLogin="recoveryLogin"
         ></login-login>
         <register 
             class="modalRegister"
@@ -20,6 +21,12 @@
             @closeRegister="closeRegister"
             @clickRegisterAkk="clickRegisterAkk"
         ></register>
+        <recovery 
+            v-show="recovery === true"
+            class="modalRecovery"
+            @recoveryPass="recoveryPass"
+            @closeRecoveryPass="closeRecoveryPass"
+        ></recovery>
         <div class="blackout" v-show="back" @click="closeAutorization"></div>
     </div>
 </template>
@@ -30,11 +37,13 @@
     import viewAlco from './viewAlcohol/viewAlcohol'
     import login from '../login/login'
     import register from '../register/register'
+    import recovery from '../recovery/recovery'
     export default {
         data(){
             return {
                 login: false,
                 register: false,
+                recovery: false,
                 back: false,
                 user: {},
             }
@@ -56,10 +65,10 @@
                 if(this.user.password === "" || this.user.login === ""){
                     this.login = true;
                     this.back = true;
-                } else {
+                } else if(this.user.password === "123" && this.user.login === "123"){
                     this.login = false;
-                    this.back = true;
-                }
+                    this.back = false;
+                } 
             },
             clickRegister(){
                 this.register = true;
@@ -73,6 +82,19 @@
             clickRegisterAkk(){
                 this.register = false;
                 this.back = false;
+            },
+            recoveryLogin(){
+                this.login = false;
+                this.recovery = true;
+                this.back = true;
+            },
+            recoveryPass(){
+                this.recovery = false;
+                this.back = false;
+            },
+            closeRecoveryPass(){
+                this.recovery = false;
+                this.back = false;
             }
         },
         components: {
@@ -82,6 +104,7 @@
             'view-alco': viewAlco,
             "login-login":login,
             register,
+            recovery
             
         }
     }
@@ -102,13 +125,13 @@
         margin: 0 auto;
     }
     .modalLogin{
-        position: absolute;
-        margin: auto;
-        top: 0;
-        bottom: 0;
-        left: 0;
         right: 0;
         z-index: 1000;
+        position: fixed;
+        margin: auto;
+        top: 15%;
+        left: 0;
+        // transform: translate(-50%, -50%);
     }
     .blackout{
         z-index: 800;
@@ -128,5 +151,13 @@
         left: 0;
         right: 0;
         z-index: 1000;
+    }
+    .modalRecovery{
+        right: 0;
+        z-index: 1000;
+        position: fixed;
+        margin: auto;
+        top: 40%;
+        left: 0;
     }
 </style>
