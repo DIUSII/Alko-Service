@@ -112,8 +112,8 @@ export default {
         },
         async comInAkk(){// Вход в учентную запись
             this.userTest = {
-                email: "Userfortest@mail.ru",
-                "password":"Userfortest"
+                email: "asdf",
+                "password":"asdf"
             }; 
             await axios
                 .post('http://alco-backend.ru.host1813568.serv76.hostland.pro/public/api/login', this.userTest)

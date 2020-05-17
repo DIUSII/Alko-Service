@@ -6,6 +6,7 @@
         <form class="register__form">
             <label >
                 <p class="register__text">Ваше имя*</p>
+                <!-- Инпут Имя -->
                 <input 
                     type="text" 
                     class="register__input" 
@@ -20,6 +21,7 @@
             <span class="register__length-error" v-show="lengthValue === true">Имя должно содержать от 1 до 25 символов.</span>
             <label >
                 <p class="register__text">E-mail*</p>
+                <!-- Инпут еmail -->
                 <input 
                     type="text" 
                     class="register__input" 
@@ -37,6 +39,7 @@
             </span>
             <label >
                 <p class="register__text">Пароль*</p>
+                <!-- Инпут пароль -->
                 <input 
                     type="password" 
                     class="register__input" 
@@ -51,6 +54,7 @@
             <span class="register__length-error" v-show="lengthValuePassword === true">Пароль должен содержать от 6 до 25 символов</span>
             <label >
                 <p class="register__text">Повторите пароль*</p>
+                <!-- Инпут повтора пароля -->
                 <input 
                     type="password" 
                     class="register__input" 

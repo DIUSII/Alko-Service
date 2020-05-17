@@ -1,21 +1,18 @@
 <template>
     <div class="nav-bar">
-        <div class="fixed-container flex-container">
+        <div class="nav-bar__container flex-container">
             <!-- Правая сторона хедера -->
             <div class="nav-bar__logo-main-shop flex-container">
                 <div class="nav-bar__logo">
                     <img src="./images/logo.svg" alt="logo" class="nav-bar__logo_img">
                     <span class="nav-bar__logo_text">лого</span>
                 </div>
-                <h2 class="nav-bar__title">Главная</h2>
-                <p class="nav-bar__shop">
-                    Магазины
-                    <span 
-                        class="nav-bar__shop_arrow" 
-                        :class="{'rotate-arrow': rotateArrow}"
-                        @click="clickRotateArrow"
-                    ></span>
-                </p>
+                <ul class="nav-bar__items">
+                    <li class="nav-bar__item">Слабоалкогольные</li>
+                    <li class="nav-bar__item">Среднеалкогольные</li>
+                    <li class="nav-bar__item">Крепкие напитки</li>
+                    <li class="nav-bar__item">Коктейли</li>
+                </ul>
             </div>
             <!-- Правая сторона хедера -->
             <div class="nav-bar__search-like-profile flex-container">
@@ -23,13 +20,11 @@
                     <input type="text" class='nav-bar__search_input' placeholder="Поиск">
                     <span class="nav-bar__search_icon"></span>
                 </div>
-                <div class="nav-bar__like">
-                    <div class="nav-bar__like_text">Понравилось</div>
-                    <img src="./images/like.svg" alt="like" class="nav-bar__like_img">
-                </div>
-                <div class="nav-bar__profile">
-                    <div class="nav-bar__profile_text" @click="$emit('openAutorization')">Профиль</div>
+                <div class="nav-bar__profile_back">
                     <img src="./images/man.svg" alt="man" class="nav-bar__profile_img">
+                </div>
+                <div class="nav-bar__likes">
+                    <img src="./images/black-heart.svg" alt="heart" class="nav-bar__img-heart">
                 </div>
             </div>
         </div>
@@ -39,13 +34,10 @@
     export default {
         data(){
             return{
-                rotateArrow: false
+                
             }
         },
         methods: {
-            clickRotateArrow(){
-                this.rotateArrow = !this.rotateArrow;
-            }
         }
     }
 </script>
@@ -56,6 +48,10 @@
     .nav-bar{//Левая часть хедера
         padding: 23px 38px;
         background: #F6DB68;
+        &__container{
+            max-width: 1800px;
+            margin: 0 auto;
+        }
         &__logo{
             &_img{
                 vertical-align: middle;
@@ -70,56 +66,51 @@
                 margin-left: 11px;
             }
         }
-        &__title{
+        &__items{
             margin: 0;
-            margin-left: 60px;
-            font-family: Montserrat;
-            font-weight: 500;
-            font-size: 18px;
+            padding: 0;
+            list-style: none;
+            margin-left: 57px;
         }
-        &__shop{
-            margin: 0;
-            margin-left: 50px;
+        &__item{
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 32px;
             font-family: Montserrat;
             font-weight: 500;
-            font-size: 18px;
-            &_arrow{
-                display: inline-block;
-                vertical-align: middle;
-                background: url('./images/shop-arrow.svg') no-repeat 100% 40%;
-                width: 12px;
-                height: 8px;
-                margin-left: 11px;
+            font-size: 20px;
+            &:nth-last-child(1){
+                margin-right: 0px;
             }
         }
     }
     .nav-bar{// Правая часть хедера
         &__search{
             position: relative;
+            width: 331px;
             &_input{
-                background: #E8D06C;
+                background: #FFF;
                 border: none;
                 border-radius: 50px;
                 outline: none;
-                max-width: 163px;
+                max-width: 297px;   
                 width: 100%;
                 height: 44px;
                 font-family: Montserrat;
-                font-size: 16px;
-                color: #6F6F6F;
-                padding-left: 47px;
+                color: rgb(17, 6, 6);
+                padding-left: 24px;
                 padding-right: 10px;
             }
             &_icon{
                 // display: inline-block;
                 background: url('./images/icon-search.svg') no-repeat;
-                width:16px;
-                height: 16px;
+                width:19px;
+                height: 19px;
                 position: absolute;
                 margin: auto;
                 top: 0;
                 bottom: 0;
-                left: 19px;
+                right: 19px;
             }
         }
         &__like{
@@ -137,20 +128,31 @@
                 vertical-align: middle;
             }
         }
-        &__profile{
-            margin-left: 52px;
-            &_text{
-                font-family: Montserrat;
-                font-weight: 500;
-                font-size: 16px;
-                display:inline-block;
-                vertical-align: middle;
-            }
-            &_img{
-                margin-left: 10px;
-                display:inline-block;
-                vertical-align: middle;
-            }
+        &__profile_back{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #FFF;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            margin-left: 20px;
+        }
+        &__likes{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #FFF;
+            border: none;
+            border-radius: 50%;
+            width: 46px;
+            height: 46px;
+            margin-left: 20px;
+        }
+        &__profile_img{
+            width:21px;
+            height: 22px;
         }
     }
 </style>
