@@ -64,7 +64,7 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
+import {mapGetters, mapMutations, mapActions} from 'vuex'
 export default {
     data(){
         return {
@@ -84,8 +84,15 @@ export default {
             info: null
         }
     },
+    computed: 
+        // allCount() {
+        //     return this.$store.getters.allCount;    
+        // }
+        mapGetters(['conclusionUser'])
+    ,
     methods: {
-        
+        ...mapMutations(['assignUserInput']),
+        ...mapActions(['autorization']),
         fillInput(){//Проверяет заполненость input логин
             if(this.login === ""){
                 this.checkInput = false;
@@ -111,19 +118,13 @@ export default {
             this.errorNotRightInput = false;
         },
         async comInAkk(){// Вход в учентную запись
-            this.userTest = {
-                email: "asdf",
-                "password":"asdf"
-            }; 
-            await axios
-                .post('http://alco-backend.ru.host1813568.serv76.hostland.pro/public/api/login', this.userTest)
-                .then( response =>{
-                    this.testTestGet =  response;
-                })
-                .catch(function (error) {
-                    console.log(error.response)
-                });
-            console.log(this.testTestGet);
+            let user = {
+                email: 'Userfortest@mail.ru',
+                password: 'Userfortest',
+            }
+            // this.assignUserInput(user);
+            this.autorization(user);
+            // console.log(this.testTestGet.data.token);
             if(this.login === ""){
                 this.nullValueInput = true;
                 this.errorNullInput = true;
@@ -132,12 +133,8 @@ export default {
                 this.nullValueInputPass = true;
                  this.errorNullInputPass = true;
             }
-            let user = {
-                login: this.login,
-                password: this.password,
-            }
             this.$emit('dataAkk', user);
-            if(this.login == 123 && this.password == 123){ //Если логин и пароль правильный
+            if(this.login === "Userfortest@mail.ru" && this.password === 'Userfortest'){ //Если логин и пароль правильный
                 this.focusInput = this.focusInputPass = false;
                 this.checkInput = this.checkInputPass = false;
                 this.nullValueInput = this.nullValueInputPass = false;
@@ -166,7 +163,7 @@ export default {
                 this.checkInput = this.checkInputPass = false;
                 this.errorNullInputPass = true;
 
-            } else if(this.login != 123 || this.password != 123){ // Если логин и пароль не совпадают
+            } else { // Если логин и пароль не совпадают
                 this.errorNotRightInput = true;
                 this.nullValueInput = this.nullValueInputPass = true;
                 this.focusInput = this.focusInputPass = false;

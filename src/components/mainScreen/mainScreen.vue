@@ -6,6 +6,7 @@
             <sorting></sorting>
             <view-alco></view-alco>
         </div>
+        <footer-container></footer-container>
         <login-login 
             class="modalLogin" 
             v-show="login" 
@@ -14,6 +15,7 @@
             @dataAkk="dataAkk($event)"
             @clickRegister="clickRegister"
             @recoveryLogin="recoveryLogin"
+            @arrayToken="arrayToken($event)"
         ></login-login>
         <register 
             class="modalRegister"
@@ -39,6 +41,8 @@
     import login from '../login/login'
     import register from '../register/register'
     import recovery from '../recovery/recovery'
+    import footer from  './footer/footer'
+    // import axios from 'axios'
     export default {
         data(){
             return {
@@ -48,6 +52,8 @@
                 back: false,
                 user: {},
                 userReg: null,
+                token: null,
+                testTestGet: null,
             }
         },
         components: {
@@ -57,7 +63,8 @@
             'view-alco': viewAlco,
             "login-login":login,
             register,
-            recovery
+            recovery,
+            "footer-container": footer,
             
         },
         methods: {
@@ -74,12 +81,15 @@
             dataAkk(user){ // Присвоить объект из модального онка логин
                 this.user = user;
             },
+            arrayToken(token){
+                this.token = token;
+
+            },
             comInAkk(){// Проверка на валидацию  модальное окно логин
-                // console.log(user);
-                if(this.user.password === "" || this.user.login === ""){
+                if (this.token == undefined){
                     this.login = true;
                     this.back = true;
-                } else if(this.user.password === "123" && this.user.login === "123"){
+                } else{
                     this.login = false;
                     this.back = false;
                 } 

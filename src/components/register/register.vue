@@ -78,6 +78,7 @@
     </div>
 </template>
 <script>
+    import {mapActions} from 'vuex'
     export default {
         data(){
             return {
@@ -112,6 +113,7 @@
             }
         },
         methods: {
+            ...mapActions(['registerUser']),
             validationName(){
                 if(this.name === ""){ // Валидация имени
                     this.checkRedBorder = true;
@@ -181,6 +183,13 @@
                 }
             },
             clickRegisterAkk(){
+                let asdf = {
+                    email: this.email,
+                    name: this.name,
+                    password: this.password,
+                    password_confirmation: this.repeatPass
+                };
+                this.registerUser(asdf);
                 if(this.name === ""){ // Валидация имени
                     this.checkRedBorder = true;
                     this.nullValueInput = true;

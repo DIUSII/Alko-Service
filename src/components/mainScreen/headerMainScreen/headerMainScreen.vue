@@ -1,43 +1,77 @@
 <template>
     <div class="nav-bar">
         <div class="nav-bar__container flex-container">
-            <!-- Правая сторона хедера -->
+            <!-- Левая сторона хедера -->
             <div class="nav-bar__logo-main-shop flex-container">
                 <div class="nav-bar__logo">
-                    <img src="./images/logo.svg" alt="logo" class="nav-bar__logo_img">
-                    <span class="nav-bar__logo_text">лого</span>
+                    <img src="./images/wineglass.svg" alt="logo" class="nav-bar__logo_img">
+                    <h1 class="nav-bar__logo_text">лого</h1>
                 </div>
                 <ul class="nav-bar__items">
-                    <li class="nav-bar__item">Слабоалкогольные</li>
-                    <li class="nav-bar__item">Среднеалкогольные</li>
-                    <li class="nav-bar__item">Крепкие напитки</li>
-                    <li class="nav-bar__item">Коктейли</li>
+                    <li class="nav-bar__item" v-for="item in arrayMenu" :key="item.key">
+                        <img :src="item.img" alt="" class="nav-bar__item_img">
+                        <span class="nav-bar__item_span">{{item.title}}</span>
+                    </li>
                 </ul>
             </div>
             <!-- Правая сторона хедера -->
             <div class="nav-bar__search-like-profile flex-container">
                 <div class="nav-bar__search">
-                    <input type="text" class='nav-bar__search_input' placeholder="Поиск">
+                    <input 
+                        type="text" 
+                        class='nav-bar__search_input' 
+                        :class="{backgroundWhiteSearch: backWhite}" 
+                        placeholder="Поиск" 
+                        @focus="backWhite = true" 
+                        @blur="backWhite = false" 
+                        @keyup.enter="backWhite = false"
+                    >
                     <span class="nav-bar__search_icon"></span>
-                </div>
-                <div class="nav-bar__profile_back">
-                    <img src="./images/man.svg" alt="man" class="nav-bar__profile_img">
                 </div>
                 <div class="nav-bar__likes">
                     <img src="./images/black-heart.svg" alt="heart" class="nav-bar__img-heart">
                 </div>
+                <div class="nav-bar__profile_back">
+                    <img src="./images/man.svg" alt="man" class="nav-bar__profile_img" v-if="nameForAuto == false" @click="$emit('openAutorization')">
+                    <span class="nav-bar__likes_span" v-else @click="logoutUser">A</span>
+                </div>
+                <logout v-if='checkLogout'></logout>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import {mapGetters, mapMutations} from 'vuex'
+    import logout from './modalWindowLogOut/modalWindowLogOut'
     export default {
         data(){
             return{
-                
+                arrayMenu: [
+                    {
+                        title: 'Напитки',
+                        img: require('./images/botal.svg')
+                    },
+                    {
+                        title: 'Подобрать к еде',
+                        img: require('./images/apple.svg')
+                    },
+                    {
+                        title: 'Подобрать к событию',
+                        img: require('./images/cracker.svg')
+                    },
+                ],
+                backWhite: false,
             }
         },
+        computed: mapGetters(['nameForAuto', 'checkLogout']),
         methods: {
+            ...mapMutations(['openWindwoLogout']),
+            logoutUser(){
+                this.openWindwoLogout();
+            }
+        },
+        components: {
+            logout, 
         }
     }
 </script>
@@ -45,10 +79,13 @@
     .rotate-arrow{
         transform: rotate(180deg) !important;
     }
+    .backgroundWhiteSearch{
+        background: #FFF !important;
+    }
     .nav-bar{//Левая часть хедера
-        padding: 23px 38px;
         background: #F6DB68;
         &__container{
+            padding: 20px 30px;
             max-width: 1800px;
             margin: 0 auto;
         }
@@ -56,14 +93,17 @@
             &_img{
                 vertical-align: middle;
                 display: inline-block;
+                margin-right: 15px;
             }
             &_text{
-                font-family: Yeseva One;
-                font-size: 20px;
-                text-transform: uppercase;
                 vertical-align: middle;
                 display: inline-block;
-                margin-left: 11px;
+                font-family: Rubik;
+                font-weight: 500;
+                font-size: 32px;
+                margin: 0;
+                line-height: 38px;
+                color: #282828;
             }
         }
         &__items{
@@ -75,13 +115,23 @@
         &__item{
             display: inline-block;
             vertical-align: middle;
-            margin-right: 32px;
-            font-family: Montserrat;
-            font-weight: 500;
-            font-size: 20px;
+            margin-right: 30px;
             &:nth-last-child(1){
                 margin-right: 0px;
             }
+            &_span{
+                display: inline-block;
+                vertical-align: middle;
+                font-family: Montserrat;
+                font-weight: 500;
+                font-size: 20px;
+                margin-left: 8px;
+            }
+            &_img{
+                display: inline-block;
+                vertical-align: middle;
+            }
+        
         }
     }
     .nav-bar{// Правая часть хедера
@@ -89,7 +139,7 @@
             position: relative;
             width: 331px;
             &_input{
-                background: #FFF;
+                background: #ECCE7C;
                 border: none;
                 border-radius: 50px;
                 outline: none;
@@ -113,12 +163,14 @@
                 right: 19px;
             }
         }
+        &__search-like-profile{
+            position: relative;
+        }
         &__like{
             margin-left: 50px;
             &_text{
                 font-family: Montserrat;
                 font-weight: 500;
-                font-size: 16px;
                 display:inline-block;
                 vertical-align: middle;
             }
@@ -149,6 +201,13 @@
             width: 46px;
             height: 46px;
             margin-left: 20px;
+            &_span{
+                font-family: Rubik;
+                font-size: 26px;
+                line-height: 31px;
+                color: #363636;
+                cursor:pointer;
+            }
         }
         &__profile_img{
             width:21px;
