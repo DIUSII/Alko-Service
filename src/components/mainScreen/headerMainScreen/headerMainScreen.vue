@@ -1,18 +1,60 @@
 <template>
     <div class="nav-bar">
-        <div class="nav-bar__container flex-container">
+        <div class="nav-bar__container flex-container py-0">
             <!-- Левая сторона хедера -->
             <div class="nav-bar__logo-main-shop flex-container">
                 <div class="nav-bar__logo">
                     <img src="./images/wineglass.svg" alt="logo" class="nav-bar__logo_img">
                     <h1 class="nav-bar__logo_text">лого</h1>
                 </div>
-                <ul class="nav-bar__items">
+                <!-- <ul class="nav-bar__items">
                     <li class="nav-bar__item" v-for="item in arrayMenu" :key="item.key">
                         <img :src="item.img" alt="" class="nav-bar__item_img">
                         <span class="nav-bar__item_span">{{item.title}}</span>
                     </li>
+                </ul> -->
+                <ul class="nav-bar__items">
+                    <li class="nav-bar__item px-3 py-4" 
+                        :class="{backgroundWhiteNav: test1}"
+                        @mouseenter="test1 = true" 
+                        @mouseleave="test1 = false" >
+                        <img :src="require('./images/botal.svg')" alt="" class="nav-bar__item_img">
+                        <span class="nav-bar__item_span">Напитки</span>
+                        <popupDrink
+                            v-if="test1"
+                        />
+                    </li>
+                    <li class="nav-bar__item px-3 py-4" 
+                        :class="{backgroundWhiteNav: test2}"
+                        @mouseenter="test2 = true" 
+                        @mouseleave="test2 = false" >
+                        <img :src="require('./images/apple.svg')" alt="" class="nav-bar__item_img">
+                        <span class="nav-bar__item_span">Подобрать к еде</span>
+                        <popupFood
+                            v-if="test2"
+                        />
+                    </li>
+                    <li class="nav-bar__item px-3 py-4" 
+                        :class="{backgroundWhiteNav: test3}"
+                        @mouseenter="test3 = true" 
+                        @mouseleave="test3 = false" >
+                        <img :src="require('./images/cracker.svg')" alt="" class="nav-bar__item_img">
+                        <span class="nav-bar__item_span">Подобрать к событию</span>
+                        <popupEvent
+                            v-if="test3"
+                        />
+                    </li>
                 </ul>
+                <!-- <ul class="nav-bar__items">
+                    <li class="nav-bar__item" v-for="item in arrayMenu" :key="item.key" 
+                        :class="{backgroundWhiteSearch: backWhite}"
+                        @mouseenter="backWhite = true" 
+                        @mouseleave="backWhite = false" >
+                        <img :src="item.img" alt="" class="nav-bar__item_img">
+                        <span class="nav-bar__item_span">{{item.title}}</span>
+                    </li>
+                </ul> -->
+
             </div>
             <!-- Правая сторона хедера -->
             <div class="nav-bar__search-like-profile flex-container">
@@ -46,6 +88,9 @@
 <script>
     import {mapGetters, mapMutations} from 'vuex'
     import logout from './modalWindowLogOut/modalWindowLogOut'
+    import popupDrink from './popupsNav/popupDrink'
+    import popupFood from './popupsNav/popupFood'
+    import popupEvent from './popupsNav/popupEvent'
     export default {
         data(){
             return{
@@ -64,6 +109,9 @@
                     },
                 ],
                 backWhite: false,
+                test1: false,
+                test2: false,
+                test3: false,
             }
         },
         computed: mapGetters(['checkLogout', 'conclusionLogIn']),
@@ -75,7 +123,10 @@
             }
         },
         components: {
-            logout, 
+            logout,
+            popupDrink,
+            popupFood,
+            popupEvent
         }
     }
 </script>
@@ -85,6 +136,10 @@
     }
     .backgroundWhiteSearch{
         background: #FFF !important;
+    }
+    .backgroundWhiteNav{
+        background: #FFF !important;
+        border-radius: 2rem 2rem 0 0;
     }
     .nav-bar{//Левая часть хедера
         background: #F6DB68;
@@ -119,7 +174,7 @@
         &__item{
             display: inline-block;
             vertical-align: middle;
-            margin-right: 30px;
+            //margin-right: 30px;
             &:nth-last-child(1){
                 margin-right: 0px;
             }
