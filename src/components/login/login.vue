@@ -1,5 +1,5 @@
 <template>
-    <div class="login">
+    <div class="login" >
         <div class="login__title">Вход</div>
         <hr class="login__hr">
         <span class="login__cross" @click="$emit('closeAutorization')"></span>
@@ -18,11 +18,11 @@
                 required
                 placeholder="E-mail" 
                 @focus="focusInput = true"
-                @blur="focusInput = false, fillInput()"
-                @keyup.enter="fillInput"
+                @blur="focusInput = false, ifValuEmail()"
+                @keyup.enter="ifValuEmail()"
                 v-model='login'
             >
-            <span class="login__null-error" v-show="errorNullInput">Поле обязательно для заполнения.</span>
+            <span class="login__null-error" >{{conclusionError.email !== undefined ? conclusionError.email.join('') : ''}}</span>
             <!-- инпут с полей password -->
             <input 
                 required
@@ -35,12 +35,12 @@
                     redBorder: nullValueInputPass
                 }"
                 @focus="focusInputPass = true"
-                @blur="focusInputPass = false, fillInputPass()"
-                @keyup.enter="fillInputPass"
+                @blur="focusInputPass = false, ifValuePass()"
+                @keyup.enter="ifValuePass()"
                 v-model='password'
             >
-            <span class="login__null-error" v-show="errorNullInputPass">Поле обязательно для заполнения.</span>
-            <span class="login__null-error" v-show="errorNotRightInput">Неверно введен e-mail и/или пароль</span>
+            <span class="login__null-error" >{{conclusionError.password !== undefined ? conclusionError.password.join('') : ''}}</span>
+            <span class="login__null-error" >{{conclusionError.error}}</span>
             <div class="flex-container">
                 <button class="login__button" @click="$emit('comInAkk', comInAkk())">Войти</button>
                 <div class="login__forget" @click="$emit('recoveryLogin')">Забыли пароль?</div>
@@ -68,109 +68,67 @@ import {mapGetters, mapMutations, mapActions} from 'vuex'
 export default {
     data(){
         return {
-            focusInput: false,
+            focusInput: false,//Оранжевый бордер
             focusInputPass: false,
-            checkInput: false,
+            checkInput: false,// Оранжевый бекграунд
             checkInputPass: false,
-            nullValueInput: false,
+            nullValueInput: false,// Красный бордер
             nullValueInputPass: false,
-            errorNullInput: false,
-            errorNullInputPass: false,
-            errorNotRightInput: false,
             login: "",
             password: "",
-            userTest: {},
-            testTestGet: {},
-            info: null
         }
     },
-    computed: 
-        // allCount() {
-        //     return this.$store.getters.allCount;    
-        // }
-        mapGetters(['conclusionUser'])
-    ,
+    computed: mapGetters(['conclusionLogIn', 'conclusionError']),
     methods: {
-        ...mapMutations(['assignUserInput']),
+        ...mapMutations(['assignUserInput', 'closeWindwoAuto']),
         ...mapActions(['autorization']),
-        fillInput(){//Проверяет заполненость input логин
-            if(this.login === ""){
-                this.checkInput = false;
+        // Проверка поля email 
+        ifValuEmail(){
+            if(this.conclusionError.email !== undefined){
                 this.nullValueInput = true;
-                this.errorNullInput = true;
+                this.checkInput = false;
             } else {
+
                 this.checkInput = true;
                 this.nullValueInput = false;
-                this.errorNullInput = false;
             }
-            this.errorNotRightInput = false;
         },
-        fillInputPass(){// Проверяет заполненость поля пароль
-            if(this.password === ""){
-                this.checkInputPass = false;
+        // Проверка поля password
+        ifValuePass(){
+            if(this.conclusionError.password !== undefined){
                 this.nullValueInputPass = true;
-                this.errorNullInputPass = true;
+                this.checkInputPass = false;
             } else {
                 this.checkInputPass = true;
                 this.nullValueInputPass = false;
-                this.errorNullInputPass = false;
             }
-            this.errorNotRightInput = false;
         },
         async comInAkk(){// Вход в учентную запись
             let user = {
-                email: 'Userfortest@mail.ru',
-                password: 'Userfortest',
+                email: this.login,
+                password: this.password,
             }
-            // this.assignUserInput(user);
-            this.autorization(user);
-            // console.log(this.testTestGet.data.token);
-            if(this.login === ""){
+            await this.autorization(user);
+            this.ifValuEmail();
+            this.ifValuePass();
+            // Если пользователь не правильно ввел пароль или логин
+            if(this.conclusionError.error !== undefined) {
+                this.checkInput = false;
                 this.nullValueInput = true;
-                this.errorNullInput = true;
-            } 
-            if(this.password === ""){
+                this.checkInputPass = false;
                 this.nullValueInputPass = true;
-                 this.errorNullInputPass = true;
-            }
-            this.$emit('dataAkk', user);
-            if(this.login === "Userfortest@mail.ru" && this.password === 'Userfortest'){ //Если логин и пароль правильный
-                this.focusInput = this.focusInputPass = false;
-                this.checkInput = this.checkInputPass = false;
-                this.nullValueInput = this.nullValueInputPass = false;
-                this.errorNullInput = this.errorNullInputPass = false;
+            } 
+            // Когда он авторизовался
+            if(this.conclusionLogIn.token !== null) {
                 this.login = "";
                 this.password = "";
-
-            } else if(this.login === "" && this.password === ""){ // Если Пароль и Логин пустые
-                this.errorNotRightInput = false;
-                this.nullValueInput = this.nullValueInputPass = true;
-                this.focusInput = this.focusInputPass = false;
-                this.checkInput = this.checkInputPass = false;
-                this.errorNullInput = this.errorNullInputPass = true;
-
-            } else if(this.login === "" && this.password !== ""){ // Если Логин пустой
-                this.errorNotRightInput = false;
-                this.nullValueInput = true;
-                this.focusInput = this.focusInputPass = false;
-                this.checkInput = this.checkInputPass = false;
-                this.errorNullInput = true;
-
-            } else if(this.login !== "" && this.password === ""){ // Если пароль пустой
-                this.errorNotRightInput = false;
-                this.nullValueInputPass = true;
-                this.focusInput = this.focusInputPass = false;
-                this.checkInput = this.checkInputPass = false;
-                this.errorNullInputPass = true;
-
-            } else { // Если логин и пароль не совпадают
-                this.errorNotRightInput = true;
-                this.nullValueInput = this.nullValueInputPass = true;
-                this.focusInput = this.focusInputPass = false;
-                this.checkInput = this.checkInputPass = false;
-                this.errorNullInput = this.errorNullInputPass = false;
+                this.checkInput = false;
+                this.nullValueInput = false;
+                this.checkInputPass = false;
+                this.nullValueInputPass = false;
+                this.closeWindwoAuto();
             }
-        }
+        },
     }
 }
 </script>

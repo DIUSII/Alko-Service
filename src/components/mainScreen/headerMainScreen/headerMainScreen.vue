@@ -16,6 +16,7 @@
             </div>
             <!-- Правая сторона хедера -->
             <div class="nav-bar__search-like-profile flex-container">
+                <!-- Поиск по товару -->
                 <div class="nav-bar__search">
                     <input 
                         type="text" 
@@ -28,14 +29,16 @@
                     >
                     <span class="nav-bar__search_icon"></span>
                 </div>
+                <!-- Понравивешиеся ему продукты -->
                 <div class="nav-bar__likes">
                     <img src="./images/black-heart.svg" alt="heart" class="nav-bar__img-heart">
                 </div>
+                <!-- Профиль юзера -->
                 <div class="nav-bar__profile_back">
-                    <img src="./images/man.svg" alt="man" class="nav-bar__profile_img" v-if="nameForAuto == false" @click="$emit('openAutorization')">
-                    <span class="nav-bar__likes_span" v-else @click="logoutUser">A</span>
+                    <img src="./images/man.svg" alt="man" class="nav-bar__profile_img" v-if="conclusionLogIn.token === null" @click="$emit('openAutorization')">
+                    <span class="nav-bar__likes_span" v-else @click="logoutUser">{{conclusionLogIn.user.name[0].toUpperCase()}}</span>
                 </div>
-                <logout v-if='checkLogout'></logout>
+                <logout v-show="checkLogout"></logout>
             </div>
         </div>
     </div>
@@ -63,9 +66,10 @@
                 backWhite: false,
             }
         },
-        computed: mapGetters(['nameForAuto', 'checkLogout']),
+        computed: mapGetters(['checkLogout', 'conclusionLogIn']),
         methods: {
             ...mapMutations(['openWindwoLogout']),
+            // Открывает модальное окно выхода из акк
             logoutUser(){
                 this.openWindwoLogout();
             }

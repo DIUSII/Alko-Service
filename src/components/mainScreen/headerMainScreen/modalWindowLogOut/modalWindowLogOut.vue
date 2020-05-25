@@ -1,13 +1,14 @@
 <template>
     <div class="logout">
-        <span class="logout__name">Александр</span>
+        <span class="logout__name">{{conclusionLogIn.user.name !== undefined ?  conclusionLogIn.user.name : 'User'}}</span>
         <hr class="logout__hr">
         <button class="logout__exit" @click="exitoOfAcc">Выйти</button>
     </div>
 </template>
 <script>
- import {mapMutations} from 'vuex'
+ import {mapMutations,mapGetters} from 'vuex'
     export default {
+        computed: mapGetters(['conclusionLogIn']),
         methods: {
             ...mapMutations(['closeWindwoLogout']),
             exitoOfAcc(){

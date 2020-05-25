@@ -7,16 +7,16 @@
             <view-alco></view-alco>
         </div>
         <footer-container></footer-container>
+        <!-- Модальное окно авторизации -->
         <login-login 
             class="modalLogin" 
-            v-show="login" 
+            v-show="conclusionBackground" 
             @closeAutorization="closeAutorization" 
             @comInAkk="comInAkk" 
-            @dataAkk="dataAkk($event)"
             @clickRegister="clickRegister"
             @recoveryLogin="recoveryLogin"
-            @arrayToken="arrayToken($event)"
         ></login-login>
+        <!-- Модальное окно регистрации -->
         <register 
             class="modalRegister"
             v-show="register"
@@ -24,13 +24,15 @@
             @clickRegisterAkk="clickRegisterAkk"
             @user="userRegister($event)"
         ></register>
+        <!-- Модальное окно восставноление пароля -->
         <recovery 
             v-show="recovery === true"
             class="modalRecovery"
             @recoveryPass="recoveryPass"
             @closeRecoveryPass="closeRecoveryPass"
         ></recovery>
-        <div class="blackout" v-show="back" @click="closeAutorization"></div>
+        <!-- бекграунд при открытие модальных окан авто и регистрации -->
+        <div class="blackout" v-show="conclusionBackground" @click="closeAutorization"></div>
     </div>
 </template>
 <script>
@@ -42,7 +44,7 @@
     import register from '../register/register'
     import recovery from '../recovery/recovery'
     import footer from  './footer/footer'
-    // import axios from 'axios'
+    import {mapGetters, mapMutations} from 'vuex'
     export default {
         data(){
             return {
@@ -56,6 +58,7 @@
                 testTestGet: null,
             }
         },
+        computed: mapGetters(['conclusionLogIn', 'conclusionBackground']),
         components: {
             'header-main-screen': headerMainScreen,
             "filter-filter": filter,
@@ -68,22 +71,12 @@
             
         },
         methods: {
+            ...mapMutations(['openWindowAuto', 'closeWindwoAuto']),
             closeAutorization(){ // Тыкнуть на задний фон и закрыть все окна
-                this.login = false;
-                this.register = false;
-                this.recovery = false;
-                this.back = false;
+                this.closeWindwoAuto();
             },
             openAutorization(){// открыть авторизацию
-                this.login = true;
-                this.back = true;
-            },
-            dataAkk(user){ // Присвоить объект из модального онка логин
-                this.user = user;
-            },
-            arrayToken(token){
-                this.token = token;
-
+                this.openWindowAuto();
             },
             comInAkk(){// Проверка на валидацию  модальное окно логин
                 if (this.token == undefined){
@@ -160,7 +153,7 @@
         z-index: 800;
         width: 100%;
         height: 100%;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         background: #3F3F3F;
