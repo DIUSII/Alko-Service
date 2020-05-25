@@ -77,7 +77,7 @@
                 </div>
                 <!-- Профиль юзера -->
                 <div class="nav-bar__profile_back">
-                    <img src="./images/man.svg" alt="man" class="nav-bar__profile_img" v-if="conclusionLogIn.token === null" @click="$emit('openAutorization')">
+                    <img src="./images/man.svg" alt="man" class="nav-bar__profile_img" v-if="conclusionLogIn.token === null" @click="openAutorization">
                     <span class="nav-bar__likes_span" v-else @click="logoutUser">{{conclusionLogIn.user.name[0].toUpperCase()}}</span>
                 </div>
                 <logout v-show="checkLogout"></logout>
@@ -116,10 +116,13 @@
         },
         computed: mapGetters(['checkLogout', 'conclusionLogIn']),
         methods: {
-            ...mapMutations(['openWindwoLogout']),
+            ...mapMutations(['openWindwoLogout', 'openWindowAuto']),
             // Открывает модальное окно выхода из акк
             logoutUser(){
                 this.openWindwoLogout();
+            },
+            openAutorization(){
+                this.openWindowAuto();
             }
         },
         components: {

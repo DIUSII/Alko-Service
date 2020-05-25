@@ -9,20 +9,9 @@
         <footer-container></footer-container>
         <!-- Модальное окно авторизации -->
         <login-login 
-            class="modalLogin" 
-            v-show="conclusionBackground" 
-            @closeAutorization="closeAutorization" 
-            @comInAkk="comInAkk" 
-            @clickRegister="clickRegister"
-            @recoveryLogin="recoveryLogin"
         ></login-login>
         <!-- Модальное окно регистрации -->
-        <register 
-            class="modalRegister"
-            v-show="register"
-            @closeRegister="closeRegister"
-            @clickRegisterAkk="clickRegisterAkk"
-            @user="userRegister($event)"
+        <register
         ></register>
         <!-- Модальное окно восставноление пароля -->
         <recovery 
@@ -32,7 +21,6 @@
             @closeRecoveryPass="closeRecoveryPass"
         ></recovery>
         <!-- бекграунд при открытие модальных окан авто и регистрации -->
-        <div class="blackout" v-show="conclusionBackground" @click="closeAutorization"></div>
     </div>
 </template>
 <script>
@@ -158,14 +146,6 @@
         left: 0;
         background: #3F3F3F;
         opacity: 0.5;
-    }
-    .modalRegister{
-        right: 0;
-        z-index: 1000;
-        position: fixed;
-        margin: auto;
-        top: 5%;
-        left: 0;
     }
     .modalRecovery{
         right: 0;

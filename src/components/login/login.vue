@@ -1,66 +1,69 @@
 <template>
     <div class="login" >
-        <div class="login__title">Вход</div>
-        <hr class="login__hr">
-        <span class="login__cross" @click="$emit('closeAutorization')"></span>
-        <!-- Форма авторизации -->
-        <div class="login__authorization">
-            <div class="login__sub-title login__sub-title_akk">С помощью аккаунта</div>
-            <!-- инпут с полей e-mail -->
-            <input 
-                type="text" 
-                class="login__name login__input" 
-                :class="{
-                    orangeBorder:focusInput, 
-                    orangeBack: checkInput,
-                    redBorder: nullValueInput
-                }"
-                required
-                placeholder="E-mail" 
-                @focus="focusInput = true"
-                @blur="focusInput = false, ifValuEmail()"
-                @keyup.enter="ifValuEmail()"
-                v-model='login'
-            >
-            <span class="login__null-error" >{{conclusionError.email !== undefined ? conclusionError.email.join('') : ''}}</span>
-            <!-- инпут с полей password -->
-            <input 
-                required
-                type="password" 
-                class="login__password login__input" 
-                placeholder="Пароль"
-                :class="{
-                    orangeBorder:focusInputPass, 
-                    orangeBack: checkInputPass,
-                    redBorder: nullValueInputPass
-                }"
-                @focus="focusInputPass = true"
-                @blur="focusInputPass = false, ifValuePass()"
-                @keyup.enter="ifValuePass()"
-                v-model='password'
-            >
-            <span class="login__null-error" >{{conclusionError.password !== undefined ? conclusionError.password.join('') : ''}}</span>
-            <span class="login__null-error" >{{conclusionError.error}}</span>
-            <div class="flex-container">
-                <button class="login__button" @click="$emit('comInAkk', comInAkk())">Войти</button>
-                <div class="login__forget" @click="$emit('recoveryLogin')">Забыли пароль?</div>
-            </div>
-        </div>
-        <!--Ccылки на соцсети -->
-        <div class="login__network">
+        <div class="login__modal" v-show="conclusionBackground">
+            <div class="login__title">Вход</div>
             <hr class="login__hr">
-            <div class="login__sub-title">Войти через</div>
-            <div class="login__vk">
-                <img src="./images/vk.svg" alt="vk" class="login__img_vk">
-                <div class="login__fiqcaption_vk">ВКонтакте</div>
+            <span class="login__cross" @click="closeLogin"></span>
+            <!-- Форма авторизации -->
+            <div class="login__authorization">
+                <div class="login__sub-title login__sub-title_akk">С помощью аккаунта</div>
+                <!-- инпут с полей e-mail -->
+                <input 
+                    type="text" 
+                    class="login__name login__input" 
+                    :class="{
+                        orangeBorder:focusInput, 
+                        orangeBack: checkInput,
+                        redBorder: nullValueInput
+                    }"
+                    required
+                    placeholder="E-mail" 
+                    @focus="focusInput = true"
+                    @blur="focusInput = false, ifValuEmail()"
+                    @keyup.enter="ifValuEmail()"
+                    v-model='login'
+                >
+                <span class="login__null-error" >{{conclusionError.email !== undefined ? conclusionError.email.join('') : ''}}</span>
+                <!-- инпут с полей password -->
+                <input 
+                    required
+                    type="password" 
+                    class="login__password login__input" 
+                    placeholder="Пароль"
+                    :class="{
+                        orangeBorder:focusInputPass, 
+                        orangeBack: checkInputPass,
+                        redBorder: nullValueInputPass
+                    }"
+                    @focus="focusInputPass = true"
+                    @blur="focusInputPass = false, ifValuePass()"
+                    @keyup.enter="ifValuePass()"
+                    v-model='password'
+                >
+                <span class="login__null-error" >{{conclusionError.password !== undefined ? conclusionError.password.join('') : ''}}</span>
+                <span class="login__null-error" >{{conclusionError.error}}</span>
+                <div class="flex-container">
+                    <button class="login__button" @click="$emit('comInAkk', comInAkk())">Войти</button>
+                    <div class="login__forget" @click="$emit('recoveryLogin')">Забыли пароль?</div>
+                </div>
             </div>
-            <div class="login__google">
-                <img src="./images/google.svg" alt="google" class="login__img_google">
-                <div class="login__fiqcaption_google">Google</div>
+            <!--Ccылки на соцсети -->
+            <div class="login__network">
+                <hr class="login__hr">
+                <div class="login__sub-title">Войти через</div>
+                <div class="login__vk">
+                    <img src="./images/vk.svg" alt="vk" class="login__img_vk">
+                    <div class="login__fiqcaption_vk">ВКонтакте</div>
+                </div>
+                <div class="login__google">
+                    <img src="./images/google.svg" alt="google" class="login__img_google">
+                    <div class="login__fiqcaption_google">Google</div>
+                </div>
             </div>
+            <hr class="login__hr">
+            <div class="login__registration" @click="clickRegister">Ещё не зарегестрированы? Регистрация</div>
         </div>
-        <hr class="login__hr">
-        <div class="login__registration" @click="$emit('clickRegister')">Ещё не зарегестрированы? Регистрация</div>
+        <div class="blackout" v-show="conclusionBackground" @click="closeLogin"></div>
     </div>
 </template>
 <script>
@@ -78,9 +81,9 @@ export default {
             password: "",
         }
     },
-    computed: mapGetters(['conclusionLogIn', 'conclusionError']),
+    computed: mapGetters(['conclusionLogIn', 'conclusionError', 'conclusionBackground']),
     methods: {
-        ...mapMutations(['assignUserInput', 'closeWindwoAuto']),
+        ...mapMutations(['assignUserInput', 'closeWindwoAuto', 'openRegister']),
         ...mapActions(['autorization']),
         // Проверка поля email 
         ifValuEmail(){
@@ -102,6 +105,13 @@ export default {
                 this.checkInputPass = true;
                 this.nullValueInputPass = false;
             }
+        },
+        clickRegister(){
+            this.openRegister();
+            this.closeWindwoAuto();
+        },
+        closeLogin(){
+            this.closeWindwoAuto();
         },
         async comInAkk(){// Вход в учентную запись
             let user = {
@@ -147,11 +157,18 @@ export default {
         border: 1px solid #ACACAC !important;
     }
     .login{ // Заголовок и внешний вид авторизации по vk, google
-        padding: 22px 0;
-        max-width: 520px;
-        background-color: #FFF;
-        border-radius: 30px;
-        position: relative;
+        &__modal{
+            right: 0;
+            z-index: 1000;
+            position: fixed;
+            margin: auto;
+            top: 15%;
+            left: 0;
+            padding: 22px 0;
+            max-width: 520px;
+            background-color: #FFF;
+            border-radius: 30px;
+        }
         &__title{
             font-family: Montserrat;
             font-weight: bold;
