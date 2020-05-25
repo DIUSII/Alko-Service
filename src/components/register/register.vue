@@ -83,7 +83,7 @@
     </div>
 </template>
 <script>
-    import {mapActions, mapGetters, mapMutationsy} from 'vuex'
+    import {mapActions, mapGetters, mapMutations} from 'vuex'
     export default {
         data(){
             return {
