@@ -24,7 +24,7 @@
 
 import card from '../../widgets/card/main-alco-card'
 import btn from '../../widgets/buttons/download-btn'
-import navPanel from '../../widgets/nav-main/nav-panel'
+import navPanel from '../../widgets/nav-main/nav-panel3'
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
