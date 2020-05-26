@@ -5,7 +5,7 @@
             <img src="./images/cross.png" alt="" class="favorites__cross" @click="closeModal">
         </div>
         <hr class="favorites__hr">
-        <ul class="favorites__container" v-if="array.length > 0">
+        <ul class="favorites__container" v-if="conclusionFavorites.length > 0">
             <!-- Элемент избранного -->
             <li class="favorites__item flex-container" v-for='(item,index) in conclusionFavorites' :key='item.id'>
                 <!-- Общая картинка продукта -->
@@ -64,7 +64,7 @@
             <div class="favorites__instruction">Добавьте алкоголь в избранное.</div>
             <div class="favorites__info">В этом списке будет храниться понравившийся вам алкоголь.</div>
         </div>
-        <hr class="favorites__hr" v-if="array.length > 0">
+        <hr class="favorites__hr" v-if="conclusionFavorites.length > 0">
     </div>
 </template>
 <script>
@@ -135,6 +135,9 @@
         &__item{
             padding: 20px 40px 0px;
             align-items: flex-start !important;
+            &:nth-last-child(1){
+                margin-bottom: 20px;
+            }
         }
         &__contant{
             max-width: 320px;
@@ -209,11 +212,10 @@
         }
         &__instruction{
             font-family: Rubik;
-            font-weight: 300;
-            font-size: 22px;
-            line-height: 26px;
+            font-weight: bold;
+            font-size: 26px;
+            line-height: 31px;
             margin-bottom: 22px;
-
         }
         &__array-null{
             text-align: center;
@@ -225,6 +227,7 @@
             font-size: 22px;
             line-height: 26px;
             max-width:367px;
+            margin: 0 auto;
         }
     }
 </style>

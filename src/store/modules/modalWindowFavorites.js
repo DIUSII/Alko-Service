@@ -6,8 +6,8 @@ export default {
         closeWindowFavorites(state){
             state.showWindowFavorites = false;
         },
-        addItemFavorite(state){
-            state.array.push({})
+        addItemFavorite(state, product){
+            state.array.push(product);
         },
         deleteItemInFavorite(state, index){
             state.array.splice(index, 1);

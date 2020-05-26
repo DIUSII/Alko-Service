@@ -1,9 +1,9 @@
 <template>
     <b-col cols="12" md="6" xl="4">
-        <router-link class="alco-card" :to="{name: 'shops'}">
+        <!-- <router-link class="alco-card" :to="{name: 'shops'}"> -->
             <b-card 
-            class="mx-2 my-3 shadow alco-card__content"
-        >
+                class="mx-2 my-3 shadow alco-card__content"
+            >
             <b-row>
                 <b-col>
                     <div class="star">
@@ -19,7 +19,7 @@
                     <b-img src="https://picsum.photos/74/238/?image=25" class="product-img" fluid alt="image"></b-img> <!-- фотка затычка можно использовать просто img -->
                 </b-col>
                 <b-col class="text-right">
-                   <img src="./images/like.svg" alt="like">
+                   <img src="./images/like.svg" alt="like" @click="addInFavorites">
                 </b-col>
             </b-row>
             <b-row>
@@ -39,14 +39,14 @@
                 </b-col>
             </b-row>
         </b-card>
-        </router-link>
+        <!-- </router-link> -->
     </b-col>
 </template>
 
 <script>
 
 import btn from '../buttons/main-btn'
-
+import {mapMutations} from 'vuex'
 export default {
     name: 'main-alco-card',
     components:{
@@ -64,7 +64,10 @@ export default {
 
     },
     methods:{
-
+        ...mapMutations(['addItemFavorite']),
+        addInFavorites(){
+            this.addItemFavorite(this.product);
+        }
     }
 }
 </script>

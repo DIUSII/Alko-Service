@@ -3,7 +3,7 @@
         <b-col cols="12">
             <navPanel
                 titleValue="Сейчас выбирают"
-                icon="/img/ant-design_field-time-outlined.b8d995f7.svg"
+                :icon="img"
             />
         </b-col>
         <b-col cols="12">
@@ -31,7 +31,7 @@ import {mapActions, mapGetters} from 'vuex'
 export default {
     data(){
         return {
-            
+            img: require('../../widgets/nav-main/images/ant-design_field-time-outlined.svg'),
         }
     },
     components:{
