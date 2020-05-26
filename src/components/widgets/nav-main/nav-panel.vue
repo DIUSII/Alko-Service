@@ -61,6 +61,7 @@ export default {
 
 .nav-panel{
     border-radius: 14px;
+    background: #ffffff;
 }
 
 .shadow1 {

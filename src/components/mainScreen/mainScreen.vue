@@ -155,4 +155,8 @@
         top: 40%;
         left: 0;
     }
+
+    .mainScreen{
+        background: #F5F5F5;
+    }
 </style>
