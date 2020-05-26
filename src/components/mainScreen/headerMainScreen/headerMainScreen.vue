@@ -72,8 +72,8 @@
                     <span class="nav-bar__search_icon"></span>
                 </div>
                 <!-- Понравивешиеся ему продукты -->
-                <div class="nav-bar__likes">
-                    <img src="./images/black-heart.svg" alt="heart" class="nav-bar__img-heart">
+                <div class="nav-bar__likes" @click="openModalFavorites">
+                    <img src="./images/black-heart.svg" alt="heart" class="nav-bar__img-heart" >
                 </div>
                 <!-- Профиль юзера -->
                 <div class="nav-bar__profile_back">
@@ -81,6 +81,7 @@
                     <span class="nav-bar__likes_span" v-else @click="logoutUser">{{conclusionLogIn.user.name[0].toUpperCase()}}</span>
                 </div>
                 <logout v-show="checkLogout"></logout>
+                <modal-window-favorites></modal-window-favorites>
             </div>
         </div>
     </div>
@@ -91,6 +92,7 @@
     import popupDrink from './popupsNav/popupDrink'
     import popupFood from './popupsNav/popupFood'
     import popupEvent from './popupsNav/popupEvent'
+    import modalWindowFavorites from './modalWindowFavorites/modalWindowFavorites'
     export default {
         data(){
             return{
@@ -116,20 +118,24 @@
         },
         computed: mapGetters(['checkLogout', 'conclusionLogIn']),
         methods: {
-            ...mapMutations(['openWindwoLogout', 'openWindowAuto']),
+            ...mapMutations(['openWindwoLogout', 'openWindowAuto', 'openWindowFavorites']),
             // Открывает модальное окно выхода из акк
             logoutUser(){
                 this.openWindwoLogout();
             },
             openAutorization(){
                 this.openWindowAuto();
+            },
+            openModalFavorites(){
+                this.openWindowFavorites();
             }
         },
         components: {
             logout,
             popupDrink,
             popupFood,
-            popupEvent
+            popupEvent,
+            'modal-window-favorites': modalWindowFavorites,
         }
     }
 </script>
@@ -205,7 +211,7 @@
                 border: none;
                 border-radius: 50px;
                 outline: none;
-                max-width: 297px;   
+                max-width: 320px;   
                 width: 100%;
                 height: 44px;
                 font-family: Montserrat;
