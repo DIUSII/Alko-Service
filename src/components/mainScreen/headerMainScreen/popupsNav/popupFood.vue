@@ -1,6 +1,6 @@
 <template>
     <div class="popup-drink">
-        <b-row class="px-5 py-5">
+        <b-row class="px-5 py-5 justify-content-around">
             <b-col cols="12" md="4" xl="3">
 
                 <div class="category pb-4">
@@ -32,7 +32,7 @@
                 </div>
 
             </b-col>
-            <b-col cols="12" md="4" xl="3">
+            <b-col cols="12" md="4" xl="4">
                 <div class="category">
                     <div class="title-group pb-2">
                         <span class="title-group__text">Низкокалорийные салаты</span>
@@ -60,7 +60,7 @@
                     <p class="pb-2 mb-0 pl-2 sub-food">Козий сыр</p>
                 </div>                
             </b-col>
-            <b-col>
+            <b-col xl="3">
                 <div class="category">
                     <div class="title-group pb-2">
                         <span class="title-group__text">Паста</span>
@@ -110,7 +110,8 @@
         font-size: 18px;
         font-weight: bold;
         font-family: Montserrat, sans-serif;
-        :hover{
+        &:hover{
+            color: #45988E;
             cursor: pointer;
         }
     }
@@ -135,7 +136,9 @@
 
 .sub-food{
     border-left: #45988E solid 2px;
-    :hover{
+    &:hover{
+        font-weight: bold;
+        color: #45988E;
         cursor: pointer;
     }
 }

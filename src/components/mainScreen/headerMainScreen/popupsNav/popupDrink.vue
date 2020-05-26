@@ -1,6 +1,6 @@
 <template>
     <div class="popup-drink">
-        <b-row class="px-5 py-4">
+        <b-row class="px-5 py-4 justify-content-around">
             <b-col cols="12" md="4" xl="3">
 
                 <div class="category pb-4">
@@ -17,39 +17,39 @@
                         <img :src="require('../images/openmoji_wine-glass.svg')" alt="wine">
                         <span class="title-group__text">Среднеалкогольные</span>
                     </div>
-                    <p class="mb-2 pl-2">Вино</p>
-                    <p class="mb-2 pl-2">Шампанское</p>
-                    <p class="mb-2 pl-2">Десертные вина</p>
-                    <p class="mb-2 pl-2">Вермут</p>
+                    <p class="mb-2 pl-2 category__sub-drink">Вино</p>
+                    <p class="mb-2 pl-2 category__sub-drink">Шампанское</p>
+                    <p class="mb-2 pl-2 category__sub-drink">Десертные вина</p>
+                    <p class="mb-2 pl-2 category__sub-drink">Вермут</p>
                 </div>
             </b-col>
-            <b-col cols="12" md="4" xl="3">
+            <b-col cols="12" md="3">
                 <div class="category">
                     <div class="title-group pb-2">
                         <img :src="require('../images/openmoji_tumbler-glass.svg')" alt="wine">
                         <span class="title-group__text">Крепкие напитки</span>
                     </div>
                     <b-row>
-                        <b-col>
-                            <p class="mb-2 pl-2">Виски</p>
-                            <p class="mb-2 pl-2">Водка</p>
-                            <p class="mb-2 pl-2">Ром</p>
-                            <p class="mb-2 pl-2">Джин</p>
+                        <b-col cols="6" md="4">
+                            <p class="mb-2 pl-2 category__sub-drink">Виски</p>
+                            <p class="mb-2 pl-2 category__sub-drink">Водка</p>
+                            <p class="mb-2 pl-2 category__sub-drink">Ром</p>
+                            <p class="mb-2 pl-2 category__sub-drink">Джин</p>
                         </b-col>
                         <b-col>
-                            <p class="mb-2 pl-2">Бренди, коньяк</p>
-                            <p class="mb-2 pl-2">Абсент</p>
-                            <p class="mb-2 pl-2">Текила</p>
-                            <p class="mb-2 pl-2">Ликер</p>                        
+                            <p class="mb-2 pl-2 category__sub-drink">Бренди, коньяк</p>
+                            <p class="mb-2 pl-2 category__sub-drink">Абсент</p>
+                            <p class="mb-2 pl-2 category__sub-drink">Текила</p>
+                            <p class="mb-2 pl-2 category__sub-drink">Ликер</p>                        
                         </b-col>
                     </b-row>
 
                     <b-col class="pl-2">
-                        <p class="mb-2">Настойка, наливка, биттер, бальзам</p>                      
+                        <p class="mb-2 category__sub-drink">Настойка, наливка, биттер, бальзам</p>                      
                     </b-col>
                 </div>
             </b-col>
-            <b-col>
+            <b-col cols="12" xl="5">
                 <b-row>
                     <b-col cols="12">
                         <div class="category">
@@ -58,29 +58,29 @@
                                 <span class="title-group__text">Коктейли</span>
                             </div>
                             <b-row>
-                                <b-col>
+                                <b-col cols="4">
                                     <p class="mb-2 pl-2 type">Популярные</p>
-                                    <p class="mb-2 pl-2">Махито</p>
-                                    <p class="mb-2 pl-2">Маргарита</p>
-                                    <p class="mb-2 pl-2">Лонг-Айленд</p>
-                                    <p class="mb-2 pl-2">Пина колада</p>
-                                    <p class="mb-2 pl-2">Глинтвейн</p>
-                                </b-col>
-                                <b-col>
+                                    <p class="mb-2 pl-2 category__sub-drink">Махито</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Маргарита</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Лонг-Айленд</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Пина колада</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Глинтвейн</p>
+                                </b-col >
+                                <b-col cols="4" class="pr-0">
                                     <p class="mb-2 pl-2 type">По вкусу</p>
-                                    <p class="mb-2 pl-2">Сауэры</p>
-                                    <p class="mb-2 pl-2">Слинги</p>
-                                    <p class="mb-2 pl-2">Коллинзы</p>
-                                    <p class="mb-2 pl-2">Физы</p>      
-                                    <p class="mb-2 pl-2">Пуншы</p>   
-                                    <p class="mb-2 pl-2">Гроги</p>                     
+                                    <p class="mb-2 pl-2 category__sub-drink">Сауэры</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Слинги</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Коллинзы</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Физы</p>      
+                                    <p class="mb-2 pl-2 category__sub-drink">Пуншы</p>   
+                                    <p class="mb-2 pl-2 category__sub-drink">Гроги</p>                     
                                 </b-col>
-                                <b-col>
+                                <b-col cols="4" class="pl-0">
                                     <p class="mb-2 pl-2 type">По типу</p>
-                                    <p class="mb-2 pl-2">Согревающие</p>
-                                    <p class="mb-2 pl-2">Лонг дринки</p>
-                                    <p class="mb-2 pl-2">Шорт дринки</p>
-                                    <p class="mb-2 pl-2">Шоты</p>                        
+                                    <p class="mb-2 pl-2 category__sub-drink">Согревающие</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Лонг дринки</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Шорт дринки</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Шоты</p>                        
                                 </b-col>
                             </b-row>
                         </div>
@@ -103,6 +103,7 @@
     }
 </script>
 <style lang="scss" scoped>
+
 .title-group{
     display: flex;
     align-items: center;
@@ -110,26 +111,38 @@
         font-size: 18px;
         font-weight: bold;
         font-family: Montserrat, sans-serif;
-        :hover{
+        &:hover{
+            color: #45988E;
             cursor: pointer;
-    }
+        }
     }
 }
 
 .type{
     color: #7E7E7E;
 }
-    .popup-drink{
-        position: absolute;
-        background: #FFFFFF;
-        border: none;
-        margin: auto;
-        top: 4.9rem;
-        right: 30%;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-        border-radius: 0 0 18px 18px;
-        max-width: 1200px;
-        width: 100%;
-        z-index: 1000;
+    
+.popup-drink{
+    position: absolute;
+    background: #FFFFFF;
+    border: none;
+    margin: auto;
+    top: 4.9rem;
+    right: 40%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 0 0 18px 18px;
+    max-width: 1000px;
+    width: 100%;
+    z-index: 1000;
+} 
+
+.category{
+    &__sub-drink{
+        &:hover{
+            color: #45988E;
+            cursor: pointer;
+        }
     }
+}
+
 </style>
