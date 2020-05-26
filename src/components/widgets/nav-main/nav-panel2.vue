@@ -1,5 +1,5 @@
 <template>
-    <b-row class="shadow py-2 justify-content-between nav-panel">
+    <b-row class="shadow1 py-2 justify-content-between nav-panel  mx-2">
         <b-col>
             <div class="title">
                 <img src="./images/ant-design_field-time-outlined.svg" alt="icon">  <!-- Сюда надо передавть путь до картинки(props: icon) и использовать его, тогда будет один универскальный компонент-->
@@ -62,5 +62,9 @@ export default {
 
 .nav-panel{
     border-radius: 14px;
+}
+
+.shadow1 {
+    box-shadow: 0 0.1rem 0.7rem rgba(0, 0, 0, 0.15) !important;
 }
 </style>

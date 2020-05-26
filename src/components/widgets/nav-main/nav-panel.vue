@@ -1,8 +1,9 @@
 <template>
-    <b-row class="shadow py-2 justify-content-between nav-panel">
+    <b-row class="shadow1 py-2 justify-content-between nav-panel mx-2">
         <b-col>
             <div class="title">
-                <img src="./images/bytesize_eye.svg" alt="icon">  <!-- Сюда надо передавть путь до картинки(props: icon) и использовать его, тогда будет один универскальный компонент-->
+                <!-- <b-img :src="icon" alt="icon"></b-img> -->
+                <img src="./images/bytesize_eye.svg" alt="icon"> <!-- Сюда надо передавть путь до картинки(props: icon) и использовать его, тогда будет один универскальный компонент -->
                 <span class="title__text pl-2">{{titleValue}}</span>
             </div>
         </b-col>
@@ -60,5 +61,9 @@ export default {
 
 .nav-panel{
     border-radius: 14px;
+}
+
+.shadow1 {
+    box-shadow: 0 0.1rem 0.7rem rgba(0, 0, 0, 0.15) !important;
 }
 </style>

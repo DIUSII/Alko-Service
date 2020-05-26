@@ -21,6 +21,9 @@ export default {
     },
     mutations:{
         SET_PRODUCTS(state, products){
+            products.forEach(element => {
+                element.ethanol = element.ethanol * 100
+            });
             state.products = products
         }
     },

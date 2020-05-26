@@ -1,5 +1,5 @@
 <template>
-    <b-row class="shadow py-2 justify-content-between nav-panel">
+    <b-row class="py-2 justify-content-between nav-panel shadow1 mx-2">
         <b-col>
             <div class="title">
                 <img src="./images/ps_sale-tag.svg" alt="icon">  <!-- Сюда надо передавть путь до картинки(props: icon) и использовать его, тогда будет один универскальный компонент-->
@@ -44,7 +44,7 @@ export default {
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .show-all{
     color: #45988E;
     &:hover{
@@ -55,5 +55,9 @@ export default {
 
 .nav-panel{
     border-radius: 14px;
+}
+
+.shadow1 {
+    box-shadow: 0 0.1rem 0.7rem rgba(0, 0, 0, 0.15) !important;
 }
 </style>

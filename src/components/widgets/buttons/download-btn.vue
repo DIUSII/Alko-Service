@@ -1,5 +1,5 @@
 <template>
-    <b-button :block="block" :id="id" class="download" :size="size" @click="action">Загрузить ещё</b-button>
+    <button :id="id" class="download w-100 py-2" @click="action">Загрузить ещё</button>
 </template>
 
 <script>
@@ -7,28 +7,10 @@
 export default {
     name: 'button-main',
     props:{
-        btnValue:{
-            type: String,
-            default(){
-                return 'button'
-            }
-        },
         id:{
             type: String,
             default(){
                 return null
-            }
-        },
-        block:{
-            type: Boolean,
-            default(){
-                return false
-            }
-        },
-        size:{
-            type: String,
-            default(){
-                return 'lg'
             }
         },
     },
@@ -45,6 +27,9 @@ export default {
     border: 2px solid #F6DB68;
     background: #F6DB68;
     border-radius: 24px;
+    color: #000000;
+    font-size: 20px;
+    font-family: Rubik, sans-serif;
 }
 
 </style>
