@@ -2,7 +2,6 @@
     <b-row class="justify-content-center mt-5">
         <b-col cols="12">
             <navPanel
-                icon="/img/ps_sale-tag.b2533c19.svg"
                 titleValue="Лучшая цена"
             />
         </b-col>
