@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import autorization from './modules/autorization'
 import register from './modules/register'
 import modalWindowFavorites from './modules/modalWindowFavorites'
+import getProducts from './modules/product'
 
 Vue.use(Vuex)
 
@@ -47,6 +48,7 @@ export default new Vuex.Store({
   modules: {
     autorization,
     register,
-    modalWindowFavorites
+    modalWindowFavorites,
+    getProducts 
   }
 })

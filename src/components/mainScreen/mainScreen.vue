@@ -1,7 +1,7 @@
 <template>
     <div class="mainScreen">
         <header-main-screen @openAutorization="openAutorization"></header-main-screen>
-        <filter-filter></filter-filter>
+        <!-- <filter-filter></filter-filter> -->
         <div class="fixed-container sorting-viewAclo">
             <sorting></sorting>
             <view-alco></view-alco>
@@ -25,7 +25,7 @@
 </template>
 <script>
     import headerMainScreen from "./headerMainScreen/headerMainScreen"
-    import filter from './filter/filter'
+    //import filter from './filter/filter'
     import sorting from './sorting/sorting'
     import viewAlco from './viewAlcohol/viewAlcohol'
     import login from '../login/login'
@@ -49,7 +49,7 @@
         computed: mapGetters(['conclusionLogIn', 'conclusionBackground']),
         components: {
             'header-main-screen': headerMainScreen,
-            "filter-filter": filter,
+            //"filter-filter": filter,
             sorting,
             'view-alco': viewAlco,
             "login-login":login,

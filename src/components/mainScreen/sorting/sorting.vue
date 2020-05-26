@@ -85,32 +85,31 @@ export default {
 }
 </script>
 <style lang="scss">
-    .sorting {
-        
-        &__title{
+.sorting {  
+    &__title{
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 26px;
+        margin-top: 0px;
+        margin-bottom: 26px;
+    }
+    &__items{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        &_title{
             font-family: Montserrat;
-            font-weight: bold;
-            font-size: 26px;
+            font-weight: 500;
+            font-size: 18px;
             margin-top: 0px;
-            margin-bottom: 26px;
-        }
-        &__items{
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            &_title{
-                font-family: Montserrat;
-                font-weight: 500;
-                font-size: 18px;
-                margin-top: 0px;
-                margin-bottom: 10px;
-            }
-        }
-        &__item{
-            font-family: Montserrat;
-            font-size: 16px;
-            color: #5E5E5E;
             margin-bottom: 10px;
         }
     }
+    &__item{
+        font-family: Montserrat;
+        font-size: 16px;
+        color: #5E5E5E;
+            margin-bottom: 10px;
+    }
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        <div class="footer__container flex-container">
+        <div class="footer__container flex-container mt-5">
             <div class="footer__logo flex-container">
                 <img src="./images/white-wineglass.svg" alt="white-wineglass" class="footer__img-logo">
                 <span class="footer__span-logo">ЛОГО</span>

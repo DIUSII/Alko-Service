@@ -1,38 +1,28 @@
 <template>
-    <div class="viewAlco">
-        <h2 class="viewAlco__title">
-            Выбирают сейчас
-        </h2>
-        <ul class="viewAlco__items">
-            <li class="viewAlco__item" v-for="item in array" :key='item.id'>
-                <img src="./images/wine.png" alt="wine">
-                <span class="viewAlco__img"></span>
-            </li>
-        </ul>
-        <h2 class="viewAlco__title">
-            Лучшая цена
-        </h2>
-        <ul class="viewAlco__items">
-            <li class="viewAlco__item" v-for="item in array" :key='item.id'>
-                <img src="./images/wine.png" alt="wine">
-                <span class="viewAlco__img"></span>
-            </li>
-        </ul>
-    </div>
+    <b-container>
+        <youWatch/>
+        <popular/>
+        <bestPrice/>
+    </b-container>
 </template>
 <script>
-    export default {
-        data(){
-            return {
-                array: [
-                    {},
-                    {},
-                    {},
-                    {},
-                ]
-            }
+
+import youWatch from './you-watch'
+import popular from './popular'
+import bestPrice from './best-price'
+
+export default {
+    data(){
+        return {
+
         }
+    },
+    components:{
+        youWatch,
+        popular,
+        bestPrice
     }
+}
 </script>
 <style lang="scss">
     .viewAlco{
