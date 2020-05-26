@@ -3,7 +3,7 @@
         <b-col cols="12">
             <navPanel
                 titleValue="Вы смотрели"
-                icon="./images/bytesize_eye.svg"
+                icon="/img/bytesize_eye.cd8ede31.svg"
             />
         </b-col>
         <b-col cols="12">
