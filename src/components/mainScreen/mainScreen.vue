@@ -1,10 +1,10 @@
 <template>
     <div class="mainScreen">
-        <header-main-screen @openAutorization="openAutorization"></header-main-screen>
-        <!-- <filter-filter></filter-filter> -->
+        <header-main-screen @openAutorization="openAutorization" @visible="visibleFilter" @backToMain="backToMain"></header-main-screen>
+        <filter-filter v-if="isVisibleFilter"></filter-filter>
         <div class="fixed-container sorting-viewAclo">
             <sorting></sorting>
-            <view-alco></view-alco>
+            <view-alco v-if="isVisibleMain"></view-alco>
         </div>
         <footer-container></footer-container>
         <!-- Модальное окно авторизации -->
@@ -25,7 +25,7 @@
 </template>
 <script>
     import headerMainScreen from "./headerMainScreen/headerMainScreen"
-    //import filter from './filter/filter'
+    import filter from './filter/filter'
     import sorting from './sorting/sorting'
     import viewAlco from './viewAlcohol/viewAlcohol'
     import login from '../login/login'
@@ -44,12 +44,14 @@
                 userReg: null,
                 token: null,
                 testTestGet: null,
+                isVisibleFilter: false,
+                isVisibleMain: true
             }
         },
         computed: mapGetters(['conclusionLogIn', 'conclusionBackground']),
         components: {
             'header-main-screen': headerMainScreen,
-            //"filter-filter": filter,
+            "filter-filter": filter,
             sorting,
             'view-alco': viewAlco,
             "login-login":login,
@@ -109,6 +111,14 @@
             },
             userRegister(user){ // Регистрация пользователя
                 this.userReg = user;
+            },
+            visibleFilter(){
+                this.isVisibleFilter = true
+                this.isVisibleMain = false
+            },
+            backToMain(){
+                this.isVisibleFilter = false
+                this.isVisibleMain = true
             }
         },
     }
@@ -154,5 +164,8 @@
         margin: auto;
         top: 40%;
         left: 0;
+    }
+    .mainScreen{
+        background: #F5F5F5;
     }
 </style>

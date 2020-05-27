@@ -5,7 +5,7 @@
 
                 <div class="category pb-4">
                     <div class="title-group pb-2">
-                        <span class="title-group__text">Мясо на монгале</span>
+                        <span class="title-group__text">Мясо на мангале</span>
                     </div>
                     <p class="pb-2 mb-0 pl-2 sub-food">Стейк</p>
                     <p class="pb-2 mb-0  pl-2 sub-food">Ребрышки</p>
@@ -60,10 +60,10 @@
                     <p class="pb-2 mb-0 pl-2 sub-food">Козий сыр</p>
                 </div>                
             </b-col>
-            <b-col xl="3">
+            <b-col xl="3" class="thrid">
                 <div class="category">
                     <div class="title-group pb-2">
-                        <span class="title-group__text">Паста</span>
+                        <span class="title-group__text">Паста и пицца</span>
                     </div>
                 </div>
                 <div class="category">
@@ -126,10 +126,10 @@
     border: none;
     margin: auto;
     top: 4.9rem;
-    right: 33%;
+    right: 39%;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
     border-radius: 0 0 18px 18px;
-    max-width: 976px;
+    max-width: 890px;
     width: 100%;
     z-index: 1000;
 } 
@@ -141,5 +141,9 @@
         color: #45988E;
         cursor: pointer;
     }
+}
+
+.thrid{
+    max-width: 190px;
 }
 </style>

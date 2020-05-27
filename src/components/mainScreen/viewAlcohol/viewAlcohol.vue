@@ -1,5 +1,5 @@
 <template>
-    <b-container>
+    <b-container fluid class="viewAlco mr-0">
         <youWatch/>
         <popular/>
         <bestPrice/>
@@ -11,6 +11,7 @@ import youWatch from './you-watch'
 import popular from './popular'
 import bestPrice from './best-price'
 
+
 export default {
     data(){
         return {
@@ -20,43 +21,15 @@ export default {
     components:{
         youWatch,
         popular,
-        bestPrice
+        bestPrice,
+    },
+    methods:{
+
     }
 }
 </script>
 <style lang="scss">
-    .viewAlco{
-        &__title{
-            font-family: Montserrat;
-            font-weight: 500;
-            font-size: 24px;
-            margin-top: 0;
-            margin-bottom: 14px;
-        }
-        &__items{
-            margin: 0;
-            padding:0;
-            list-style: none;
-            margin-bottom: 39px;
-        }
-        &__item{
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 15px;
-            position: relative;
-            &:nth-last-child(){
-                margin-right: 0px;
-            }
-        }
-        &__img{
-            background: url('./images/white-heart.svg') no-repeat;
-            width: 23px;
-            height: 22px;
-            display: inline-block;
-            position: absolute;
-            margin: auto;
-            top: 21px;
-            right: 31px;
-        }
-    }
+.viewAlco{
+    max-width: 1000px;
+}
 </style>
