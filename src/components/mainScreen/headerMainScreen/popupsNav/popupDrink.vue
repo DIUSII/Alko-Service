@@ -1,15 +1,15 @@
 <template>
     <div class="popup-drink">
-        <b-row class="px-5 py-4 justify-content-around">
-            <b-col cols="12" md="4" xl="3">
+        <b-row class="px-5 py-4 justify-content-around flex-nowrap">
+            <b-col cols="12" md="4" xl="4" class="first">
 
                 <div class="category pb-4">
                     <div class="title-group pb-2">
                         <img :src="require('../images/openmoji_beer-mug.svg')" alt="beer">
                         <span class="title-group__text">Слабоалкогольные</span>
                     </div>
-                    <p class="mb-2 pl-2">Пиво</p>
-                    <p class="mb-2 pl-2">Сидр, медовуха, эль</p>
+                    <p class="mb-2 pl-2 category__sub-drink">Пиво</p>
+                    <p class="mb-2 pl-2 category__sub-drink">Сидр, медовуха, эль</p>
                 </div>
 
                 <div class="category">
@@ -18,12 +18,12 @@
                         <span class="title-group__text">Среднеалкогольные</span>
                     </div>
                     <p class="mb-2 pl-2 category__sub-drink">Вино</p>
-                    <p class="mb-2 pl-2 category__sub-drink">Шампанское</p>
+                    <p class="mb-2 pl-2 category__sub-drink">Шампанское и игристые вина</p>
                     <p class="mb-2 pl-2 category__sub-drink">Десертные вина</p>
                     <p class="mb-2 pl-2 category__sub-drink">Вермут</p>
                 </div>
             </b-col>
-            <b-col cols="12" md="3">
+            <b-col cols="12" md="3" xl="3">
                 <div class="category">
                     <div class="title-group pb-2">
                         <img :src="require('../images/openmoji_tumbler-glass.svg')" alt="wine">
@@ -64,7 +64,7 @@
                                     <p class="mb-2 pl-2 category__sub-drink">Маргарита</p>
                                     <p class="mb-2 pl-2 category__sub-drink">Лонг-Айленд</p>
                                     <p class="mb-2 pl-2 category__sub-drink">Пина колада</p>
-                                    <p class="mb-2 pl-2 category__sub-drink">Глинтвейн</p>
+                                    <p class="mb-2 pl-2 category__sub-drink">Глинтвейны</p>
                                 </b-col >
                                 <b-col cols="4" class="pr-0">
                                     <p class="mb-2 pl-2 type">По вкусу</p>
@@ -136,13 +136,17 @@
     z-index: 1000;
 } 
 
-.category{
+.category{  
     &__sub-drink{
         &:hover{
             color: #45988E;
             cursor: pointer;
         }
     }
+}
+
+.first{
+    max-width: 260px;
 }
 
 </style>

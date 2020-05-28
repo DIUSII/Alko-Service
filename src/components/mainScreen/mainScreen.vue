@@ -1,9 +1,12 @@
 <template>
     <div class="mainScreen">
-        <header-main-screen @openAutorization="openAutorization"></header-main-screen>
+        <header-main-screen @openAutorization="openAutorization" @visible="visibleFilter" @backToMain="backToMain"></header-main-screen>
+        <sorting v-if="isVisibleFilter"></sorting>
         <div class="fixed-container sorting-viewAclo">
-            <filter-filter></filter-filter>
-            <view-alco></view-alco>
+            <div style="margin: 30px;">
+                <filter-filter ></filter-filter>
+            </div>
+            <view-alco v-if="isVisibleMain"></view-alco>
         </div>
         <!-- Каталог после поиска -->
         <!-- <div class="fixed-container">
@@ -31,6 +34,7 @@
 <script>
     import headerMainScreen from "./headerMainScreen/headerMainScreen"
     import filter from './filter/filter'
+    import sorting from './sorting/sorting'
     import viewAlco from './viewAlcohol/viewAlcohol'
     import login from '../login/login'
     import register from '../register/register'
@@ -43,12 +47,20 @@
         data(){
             return {
                 recovery: false,
+                back: false,
+                user: {},
+                userReg: null,
+                token: null,
+                testTestGet: null,
+                isVisibleFilter: false,
+                isVisibleMain: true
             }
         },
         computed: mapGetters(['conclusionLogIn', 'conclusionBackground']),
         components: {
             'header-main-screen': headerMainScreen,
             "filter-filter": filter,
+            sorting,
             'view-alco': viewAlco,
             "login-login":login,
             register,
@@ -103,5 +115,8 @@
     }
     .catalogEdit{
         align-items: flex-start;
+    }
+    .mainScreen{
+        background: #F5F5F5;
     }
 </style>

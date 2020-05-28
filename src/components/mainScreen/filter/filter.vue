@@ -79,6 +79,7 @@ export default {
     box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     min-width: 370px;
+    max-width: 370px;
     width: 100%;
     box-sizing: border-box;
     padding: 20px 0;

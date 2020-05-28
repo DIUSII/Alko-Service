@@ -4,7 +4,7 @@
             <!-- Левая сторона хедера -->
             <div class="nav-bar__logo-main-shop flex-container">
                 <div class="nav-bar__logo">
-                    <img src="./images/wineglass.svg" alt="logo" class="nav-bar__logo_img">
+                    <img src="./images/wineglass.svg" alt="logo" class="nav-bar__logo_img" @click="backToMain">
                     <h1 class="nav-bar__logo_text">лого</h1>
                 </div>
                 <!-- <ul class="nav-bar__items">
@@ -45,15 +45,6 @@
                         />
                     </li>
                 </ul>
-                <!-- <ul class="nav-bar__items">
-                    <li class="nav-bar__item" v-for="item in arrayMenu" :key="item.key" 
-                        :class="{backgroundWhiteSearch: backWhite}"
-                        @mouseenter="backWhite = true" 
-                        @mouseleave="backWhite = false" >
-                        <img :src="item.img" alt="" class="nav-bar__item_img">
-                        <span class="nav-bar__item_span">{{item.title}}</span>
-                    </li>
-                </ul> -->
 
             </div>
             <!-- Правая сторона хедера -->
@@ -67,9 +58,9 @@
                         placeholder="Поиск" 
                         @focus="backWhite = true" 
                         @blur="backWhite = false" 
-                        @keyup.enter="backWhite = false"
+                        @keyup.enter="searchProduct"
                     >
-                    <span class="nav-bar__search_icon"></span>
+                    <span class="nav-bar__search_icon" @click="searchProduct"></span>
                 </div>
                 <!-- Понравивешиеся ему продукты -->
                 <div class="nav-bar__likes" @click="openModalFavorites">
@@ -128,6 +119,17 @@
             },
             openModalFavorites(){
                 this.openWindowFavorites();
+            },
+            searchProduct(){
+                let input = document.querySelector('.nav-bar__search_input')
+                //this.backWhite = true
+                this.$emit('visible')
+                if(input.value != '' && input.value.trim().length != 0){
+                    console.log(1) // здесь функция поиска запрос к бд
+                }
+            },
+            backToMain(){
+                this.$emit('backToMain')
             }
         },
         components: {
